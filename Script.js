@@ -18,36 +18,29 @@ let FourthHeading= document.querySelector(".FourthHeading");
 let FourthBtn= document.querySelector(".FourthBtn");
 let FourthInput= document.querySelector(".FourthInput");
 
-let PlayerOneName;
-let PlayerOneNumber;
-let PlayerTwoName;
-
 // First UI function
 FirstBtn.addEventListener("click", () =>{
-    PlayerOneName = FirstInput.value;
     FirstUI.style.display = "none";
     SecondUI.style.display = "block";
-    SecondHeading.textContent = "Welcome " + PlayerOneName + " Pick a number";
+    SecondHeading.textContent = "Welcome " + FirstInput.value + " Pick a number";
 });
 
 // Second UI function
 SecondBtn.addEventListener("click", () => {
-    PlayerOneNumber = SecondInput.value;
     SecondUI.style.display = "none";
     ThirdUI.style.display = "block";
 });
 
 // Third UI function
 ThirdBtn.addEventListener("click", () => {
-    PlayerTwoName = ThirdInput.value;
     ThirdUI.style.display = "none";
     FourthUI.style.display = "block";
-    FourthHeading.textContent = "Welcome " + PlayerTwoName + " Guess the number";
+    FourthHeading.textContent = "Welcome " + ThirdInput.value + " Guess the number";
 });
 
 // Fourth UI function
 FourthBtn.addEventListener("click", () => {
-    if(FourthInput.value == PlayerOneNumber){
+    if(FourthInput.value == SecondInput.value){
         FourthHeading.textContent = "Congratulations! You guessed the number!";
     } else {
         FourthHeading.textContent = "Sorry, that's not correct. Try again!";
