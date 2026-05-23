@@ -1,61 +1,55 @@
-// Game State variables
-        let player1 = "", player2 = "", targetNumber = null, chances = 3;
+let FirstUI= document.querySelector(".FirstUI");
+let FirstHeading= document.querySelector(".FirstHeading");
+let FirstBtn= document.querySelector(".FirstBtn");
+let FirstInput= document.querySelector(".FirstInput");
 
-        // Shortcut function to grab elements and toggle screens easily
-        const $ = id => document.getElementById(id);
-        const nextStep = (hideId, showId) => {
-            $(hideId).classList.add('hidden');
-            $(showId).classList.remove('hidden');
-        };
+let SecondUI= document.querySelector(".SecondUI");
+let SecondHeading= document.querySelector(".SecondHeading");
+let SecondBtn= document.querySelector(".SecondBtn");
+let SecondInput= document.querySelector(".SecondInput");
 
-        // 1. Submit Player 1 Name
-        const submitP1Name = () => {
-            player1 = $('p1Name').value || 'Player 1';
-            $('p1Greeting').innerText = `Welcome ${player1}!`;
-            nextStep('step1', 'step2');
-        };
+let ThirdUI= document.querySelector(".ThirdUI");
+let ThirdHeading= document.querySelector(".ThirdHeading");
+let ThirdBtn= document.querySelector(".ThirdBtn");
+let ThirdInput= document.querySelector(".ThirdInput");
 
-        // 2. Submit Secret Number
-        const submitSecretNumber = () => {
-            const val = $('secretNum').value;
-            if (!val) return alert("Please enter a number!");
-            targetNumber = Number(val);
-            nextStep('step2', 'step3');
-        };
+let FourthUI= document.querySelector(".FourthUI");
+let FourthHeading= document.querySelector(".FourthHeading");
+let FourthBtn= document.querySelector(".FourthBtn");
+let FourthInput= document.querySelector(".FourthInput");
 
-        // 3. Submit Player 2 Name
-        const submitP2Name = () => {
-            player2 = $('p2Name').value || 'Player 2';
-            $('p2Greeting').innerText = `Good luck, ${player2}!`;
-            nextStep('step3', 'step4');
-        };
+let PlayerOneName;
+let PlayerOneNumber;
+let PlayerTwoName;
 
-        // 4. Core Guessing Logic (The Engine)
-        const checkGuess = () => {
-            const currentGuess = Number($('guessInput').value);
-            const feedback = $('feedback');
-            feedback.classList.remove('hidden', 'text-emerald-400', 'text-rose-500', 'text-amber-500');
+// First UI function
+FirstBtn.addEventListener("click", () =>{
+    PlayerOneName = FirstInput.value;
+    FirstUI.style.display = "none";
+    SecondUI.style.display = "block";
+    SecondHeading.textContent = "Welcome " + PlayerOneName + " Pick a number";
+});
 
-            // Scenario A: Correct Guess (Win!)
-            if (currentGuess === targetNumber) {
-                feedback.innerText = `🎉 Congratulations ${player2}! You guessed it!`;
-                feedback.classList.add('text-emerald-400', 'animate-bounce');
-                $('guessBtn').disabled = true;
-                return;
-            }
+// Second UI function
+SecondBtn.addEventListener("click", () => {
+    PlayerOneNumber = SecondInput.value;
+    SecondUI.style.display = "none";
+    ThirdUI.style.display = "block";
+});
 
-            // Scenario B: Wrong Guess
-            chances--;
-            $('chancesText').innerText = `Chances left: ${chances}`;
+// Third UI function
+ThirdBtn.addEventListener("click", () => {
+    PlayerTwoName = ThirdInput.value;
+    ThirdUI.style.display = "none";
+    FourthUI.style.display = "block";
+    FourthHeading.textContent = "Welcome " + PlayerTwoName + " Guess the number";
+});
 
-            if (chances > 0) {
-                feedback.innerText = "❌ Try again!";
-                feedback.classList.add('text-rose-500');
-            } else {
-                // Scenario C: Out of chances (Game Over)
-                feedback.innerText = `💥 Game Over! ${player1} wins! The number was ${targetNumber}.`;
-                feedback.classList.add('text-amber-500');
-                $('guessBtn').disabled = true;
-                $('guessInput').disabled = true;
-            }
-        };
+// Fourth UI function
+FourthBtn.addEventListener("click", () => {
+    if(FourthInput.value == PlayerOneNumber){
+        FourthHeading.textContent = "Congratulations! You guessed the number!";
+    } else {
+        FourthHeading.textContent = "Sorry, that's not correct. Try again!";
+    }
+});
