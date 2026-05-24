@@ -20,29 +20,40 @@ let FourthInput= document.querySelector(".FourthInput");
 
 // First UI function
 FirstBtn.addEventListener("click", () =>{
+    if(FirstInput.value === ""){
+        FirstHeading.textContent = "Please enter your name to proceed";
+        return;
+    }else{
     FirstUI.style.display = "none";
     SecondUI.style.display = "block";
     SecondHeading.textContent = "Welcome " + FirstInput.value + " Pick a number";
+    }
 });
 
 // Second UI function
 SecondBtn.addEventListener("click", () => {
+    if(SecondInput.value === ""){
+        SecondHeading.textContent = "Please enter a number to proceed";
+        return;
+    }else if(SecondInput.value < 1 || SecondInput.value > 10){
+        SecondHeading.textContent = "Please enter a number between 1 and 10";
+        SecondInput.value = "";
+        return;
+    }else{
     SecondUI.style.display = "none";
     ThirdUI.style.display = "block";
+    }
 });
 
 // Third UI function
 ThirdBtn.addEventListener("click", () => {
+    if(ThirdInput.value === ""){
+        ThirdHeading.textContent = "Please enter your name to proceed";
+        return;
+    }
     ThirdUI.style.display = "none";
     FourthUI.style.display = "block";
     FourthHeading.textContent = "Welcome " + ThirdInput.value + " Guess the number";
 });
 
 // Fourth UI function
-FourthBtn.addEventListener("click", () => {
-    if(FourthInput.value == SecondInput.value){
-        FourthHeading.textContent = "Congratulations! You guessed the number!";
-    } else {
-        FourthHeading.textContent = "Sorry, that's not correct. Try again!";
-    }
-});
